@@ -8,6 +8,7 @@ import { CoreModule } from './core/core.module';
 import { TasksModule } from './tasks/tasks.module';
 
 import { AppComponent } from './app.component';
+import { UsersModule } from './users/users.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { AppComponent } from './app.component';
     FormsModule,
     CoreModule,
     TasksModule,
+    UsersModule,
     // MUST BE LAST
     AppRoutingModule
   ],

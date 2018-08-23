@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { TasksRoutingModule } from './tasks-routing.module';
-import { TaskListComponent, TaskComponent } from '.'; 
+import { TaskListComponent, TaskFormComponent, TaskComponent } from '.'; 
 
 
 @NgModule({
@@ -12,6 +12,10 @@ import { TaskListComponent, TaskComponent } from '.';
     FormsModule,
     TasksRoutingModule
   ],
-  declarations: [TaskListComponent, TaskComponent]
+  declarations: [
+    TaskListComponent, 
+    TaskComponent, 
+    TaskFormComponent
+  ]
 })
 export class TasksModule { }

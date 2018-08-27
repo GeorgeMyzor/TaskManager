@@ -6,9 +6,10 @@ import { Router } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { TasksModule } from './tasks/tasks.module';
+import { UsersModule } from './users/users.module';
+import { AdminModule } from './admin/admin.module';
 
 import { AppComponent } from './app.component';
-import { UsersModule } from './users/users.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { UsersModule } from './users/users.module';
     CoreModule,
     TasksModule,
     UsersModule,
+    AdminModule,
     // MUST BE LAST
     AppRoutingModule
   ],

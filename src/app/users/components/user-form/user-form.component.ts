@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router  } from '@angular/router';
 
 // rxjs
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { DialogService, CanComponentDeactivate } from './../../../core';
 
 import { User } from './../../models/user.model';
 import { UserArrayService } from './../../services/user-array.service';
@@ -11,7 +12,7 @@ import { UserArrayService } from './../../services/user-array.service';
   templateUrl: './user-form.component.html',
   styleUrls: ['./user-form.component.css'],
 })
-export class UserFormComponent implements OnInit, OnDestroy {
+export class UserFormComponent implements OnInit, OnDestroy, CanComponentDeactivate {
   user: User;
   originalUser: User;
 
@@ -20,7 +21,10 @@ export class UserFormComponent implements OnInit, OnDestroy {
   constructor(
     private userArrayService: UserArrayService,
     private route: ActivatedRoute,
+    private router: Router,
+    private dialogService: DialogService
   ) { }
+  
 
   ngOnInit(): void {
     this.user = new User(null, '', '');
@@ -46,12 +50,30 @@ export class UserFormComponent implements OnInit, OnDestroy {
 
     if (user.id) {
       this.userArrayService.updateUser(user);
+      this.router.navigate(['/users', {editedUserID: user.id}]);
     } else {
       this.userArrayService.addUser(user);
+      this.goBack();
     }
     this.originalUser = {...this.user};
   }
+  
+  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    const flags = Object.keys(this.originalUser).map(key => {
+      if (this.originalUser[key] === this.user[key]) {
+        return true;
+      }
+      return false;
+    });
 
-  goBack() {
+    if (flags.every(el => el)) {
+      return true;
+    }
+    
+    return this.dialogService.confirm('Discard changes?');
+  }
+
+  goBack() {    
+    this.router.navigate(['./../../'], { relativeTo: this.route});    
   }
 }

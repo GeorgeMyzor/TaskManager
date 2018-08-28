@@ -8,7 +8,7 @@ export const adminRouterComponents = [AdminComponent, AdminDashboardComponent, M
 
 const routes: Routes = [
   {
-    path: 'admin',
+    path: '',
     component: AdminComponent,    
     canActivate: [AuthGuard],    
     children: [

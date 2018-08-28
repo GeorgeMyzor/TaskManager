@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { UsersComponent, UserListComponent, UserFormComponent } from '.';
+import { UsersComponent, UserListComponent, UserFormComponent, UserResolveGuard  } from '.';
 import { CanDeactivateGuard } from './../core';
 
 export const usersRouterComponents = [UsersComponent, UserListComponent, UserFormComponent];
 
 const routes: Routes = [
   {
-    path: 'users',
+    path: '',
     component: UsersComponent,
     children: [
       {
@@ -17,6 +17,9 @@ const routes: Routes = [
       {
         path: 'edit/:userID',
         canDeactivate: [CanDeactivateGuard],
+        resolve: {
+          user: UserResolveGuard
+        },
         component: UserFormComponent,
       },
       {

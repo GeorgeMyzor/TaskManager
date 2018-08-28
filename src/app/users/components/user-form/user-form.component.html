@@ -5,7 +5,7 @@
         </h4>
     </div>
     <div class="panel-body">
-        <form *ngIf="user" (ngSubmit)="onSaveUser()" id="user-form" #form="ngForm">
+        <form (ngSubmit)="onSaveUser()" id="user-form" #form="ngForm">
           <div class="form-group">
             <label for="firstName">First Name</label>
             <input type="text" 
@@ -23,10 +23,10 @@
                 placeholder="Last Name"
                 [(ngModel)]="user.lastName">
           </div>
-	  <button 
+	     <button 
             type="submit" 
             class="btn btn-primary"
-     [disabled]="form.invalid">Save
+            [disabled]="form.invalid">Save
         </button>
         <button class="btn btn-primary"
             type="button"
